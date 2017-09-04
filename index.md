@@ -97,9 +97,7 @@ containernet> exit
 
 # [](#installation)Installation
 
-Automatic installation is provided using an Ansible playbook.
-* Requires: Ubuntu **16.04 LTS**
-
+Automatic installation is provided using an Ansible playbook. Requires a bare-metal machine or VM with Ubuntu **16.04 LTS**.
 
 ```bash
 sudo apt-get install ansible git aptitude
@@ -108,11 +106,11 @@ cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 ```
 
-
-
 # [](#references)References
 
 Containernet has been used for a variety of research tasks and networking projects. If you use Containernet, let us [know](mailto:containernet@peuster.de).
+
+## Publications
 
 * S. v. Rossem, W. Tavernier, M. Peuster, D. Colle, M. Pickavet and P. Demeester: [Monitoring and debugging using an SDK for NFV-powered telecom applications](https://biblio.ugent.be/publication/8521281/file/8521284.pdf). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, Demo Session. (2016)
 
@@ -123,6 +121,11 @@ Containernet has been used for a variety of research tasks and networking projec
 * M. Peuster, S. Dräxler, H. Razzaghi, S. v. Rossem, W. Tavernier and H. Karl: [A Flexible Multi-PoP Infrastructure Emulator for Carrier-grade MANO Systems](https://cs.uni-paderborn.de/fileadmin/informatik/fg/cn/Publications_Conference_Paper/Publications_Conference_Paper_2017/peuster_netsoft_demo_paper_2017.pdf). In IEEE 3rd Conference on Network Softwarization (NetSoft) Demo Track . (2017) **Best demo award!**
 
 * M. Peuster and H. Karl: Profile Your Chains, Not Functions: Automated Network Service Profiling in DevOps Environments. IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Berlin, Germany. (2017) (accepted)
+
+## Links
+
+* [Mininet website](http://mininet.org)
+* [Maxinet website](http://maxinet.github.io)
 
 # [](#contact)Contact
 
