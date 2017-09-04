@@ -5,7 +5,7 @@ layout: default
 
 # [](#overview)Overview
 
-Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use Docker containers as hosts in the emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) created by the [SONATA](http://sonata-nfv.eu) project.
+Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in the emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) created by the [SONATA](http://sonata-nfv.eu) project.
 
 ## Containernet in action
 
@@ -126,6 +126,7 @@ Containernet has been used for a variety of research tasks and networking projec
 
 * [Mininet website](http://mininet.org)
 * [Maxinet website](http://maxinet.github.io)
+* [Docker](https://www.docker.com)
 
 # [](#contact)Contact
 
