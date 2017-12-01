@@ -97,8 +97,10 @@ containernet> exit
 ```
 
 # [](#installation)Installation
+Containernet comes with three installation and deployment options.
 
-Automatic installation is provided using an Ansible playbook. This requires a bare-metal machine or VM with **Ubuntu 16.04 LTS**.
+## Option 1: Bare-metal installation
+Automatic installation is provided through an Ansible playbook. Requires: Ubuntu **16.04 LTS**.
 
 ```bash
 sudo apt-get install ansible git aptitude
@@ -106,6 +108,33 @@ git clone https://github.com/containernet/containernet.git
 cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
 ```
+
+## Option 2: Nested Docker deployment
+Containernet can be executed within a privileged Docker container (nested container deployment). There is also a pre-build Docker image available on [DockerHub](https://hub.docker.com/r/containernet/containernet/).
+
+```bash
+# build the container locally
+docker build -t containernet .
+```
+
+```bash
+# or pull the latest pre-build container
+docker pull containernet/containernet
+```
+
+```bash
+# run the container
+docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet /bin/bash
+```
+
+## Option 3: Vagrant-based VM creation
+Using the provided Vagrantfile is the another way to run and test Containernet:
+
+```bash
+vagrant up
+vagrant ssh
+```
+
 
 # [](#references)References
 
