@@ -11,6 +11,11 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 
 <script type="text/javascript" src="https://asciinema.org/a/4eSesgrJL8t2VikiDnHoD9qRF.js" id="asciicast-4eSesgrJL8t2VikiDnHoD9qRF" async data-autoplay="true" data-size="medium" data-loop="true" data-rows="12"></script>
 
+## News and Releases
+
+* 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
+* 2017-09-04: [Release: Containernet 1.0](https://github.com/containernet/containernet/releases/tag/v1.0)
+
 ## Cite this work
 
 If you use [Containernet](containernet.github.io) for your work, please cite the following publication:
@@ -135,6 +140,9 @@ vagrant up
 vagrant ssh
 ```
 
+# [](#libvirt)Libvirt Extension
+
+Containernet 2.0 comes with an extended version that adds [libvirt](https://libvirt.org) support which allows to connect and run arbitrary, fully-featured virtual machines (Qemu/KVM) as emulated hosts inside Containernet networks. You can find this extension in a dedicated [branch on GitHub](https://github.com/containernet/containernet/tree/libvirt_support). More documentation about the libvirt integration is available on this [wiki page](https://github.com/containernet/containernet/wiki/Libvirt-Support). *Note: The libvirt integration is still in an early stage and should be considered as experimental code!*
 
 # [](#references)References
 
@@ -142,17 +150,19 @@ Containernet has been used for a variety of research tasks and networking projec
 
 ## Publications
 
-* M. Peuster, H. Karl, and S. v. Rossem: [MeDICINE: Rapid Prototyping of Production-Ready Network Services in Multi-PoP Environments](http://ieeexplore.ieee.org/document/7919490/). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, pp. 148-153. doi: 10.1109/NFV-SDN.2016.7919490. (2016)
+* M. Peuster, H. Karl, and S. v. Rossem: [MeDICINE: Rapid Prototyping of Production-Ready Network Services in Multi-PoP Environments](http://ieeexplore.ieee.org/document/7919490/). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, pp. 148-153. doi: 10.1109/NFV-SDN.2016.7919490. IEEE. (2016)
 
-* S. v. Rossem, W. Tavernier, M. Peuster, D. Colle, M. Pickavet and P. Demeester: [Monitoring and debugging using an SDK for NFV-powered telecom applications](https://biblio.ugent.be/publication/8521281/file/8521284.pdf). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, Demo Session. (2016)
+* S. v. Rossem, W. Tavernier, M. Peuster, D. Colle, M. Pickavet and P. Demeester: [Monitoring and debugging using an SDK for NFV-powered telecom applications](https://biblio.ugent.be/publication/8521281/file/8521284.pdf). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, Demo Session. IEEE. (2016)
 
 * M. Peuster, H. Karl: [Understand Your Chains: Towards Performance Profile-based Network Service Management.](http://ieeexplore.ieee.org/document/7956044/) Accepted in Fifth European Workshop on Software Defined Networks (EWSDN). IEEE. (2016)
 
-* Qiao, Yuansong, et al. [Doopnet: An emulator for network performance analysis of Hadoop clusters using Docker and Mininet.](http://ieeexplore.ieee.org/document/7543832/) Computers and Communication (ISCC), 2016 IEEE Symposium on. IEEE, 2016.
+* Qiao, Yuansong, et al. [Doopnet: An emulator for network performance analysis of Hadoop clusters using Docker and Mininet.](http://ieeexplore.ieee.org/document/7543832/) Computers and Communication (ISCC), 2016 IEEE Symposium on. IEEE. (2016)
 
 * M. Peuster, S. Dräxler, H. Razzaghi, S. v. Rossem, W. Tavernier and H. Karl: [A Flexible Multi-PoP Infrastructure Emulator for Carrier-grade MANO Systems](https://cs.uni-paderborn.de/fileadmin/informatik/fg/cn/Publications_Conference_Paper/Publications_Conference_Paper_2017/peuster_netsoft_demo_paper_2017.pdf). In IEEE 3rd Conference on Network Softwarization (NetSoft) Demo Track . (2017) **Best demo award!**
 
-* M. Peuster and H. Karl: Profile Your Chains, Not Functions: Automated Network Service Profiling in DevOps Environments. IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Berlin, Germany. (2017)
+* M. Peuster and H. Karl: [Profile Your Chains, Not Functions: Automated Network Service Profiling in DevOps Environments](http://ieeexplore.ieee.org/document/8169826/). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Berlin, Germany. IEEE. (2017)
+
+* M. Peuster, H. Küttner and H. Karl: Let the state follow its flows: An SDN-based flow handover protocol to support state migration. In IEEE 4th Conference on Network Softwarization (NetSoft). IEEE. (2018)
 
 ## Links
 
