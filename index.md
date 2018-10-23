@@ -168,6 +168,10 @@ Containernet has been used for a variety of research tasks and networking projec
 
 * M. Peuster, H. Küttner and H. Karl: Let the state follow its flows: An SDN-based flow handover protocol to support state migration. In IEEE 4th Conference on Network Softwarization (NetSoft). IEEE. (2018)
 
+## Containernet is part of the OpenSource MANO research ecosystem
+
+<img align="center" width="300" style="margin-right: 30px" src="https://github.com/containernet/containernet.github.io/raw/master/osm_ecosystem_research.png">
+
 ## Links
 
 * [Mininet website](http://mininet.org)
