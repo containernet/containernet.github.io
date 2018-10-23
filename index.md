@@ -170,7 +170,10 @@ Containernet has been used for a variety of research tasks and networking projec
 
 ## Containernet is part of the OpenSource MANO research ecosystem
 
-<img align="center" width="300" style="margin-right: 30px" src="https://github.com/containernet/containernet.github.io/raw/master/osm_ecosystem_research.png">
+<center>
+<a href="https://osm.etsi.org/wikipub/index.php/Research" target="_blank">
+<img align="center" width="300" style="margin-right: 30px" src="https://github.com/containernet/containernet.github.io/raw/master/osm_ecosystem_research.png"></a>
+</center>
 
 ## Links
 
