@@ -18,8 +18,18 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 
 ## News and Releases
 
-* 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
-* 2017-09-04: [Release: Containernet 1.0](https://github.com/containernet/containernet/releases/tag/v1.0)
+### 2019-07-05: [Release: Containernet 3.0](https://github.com/containernet/containernet/releases/tag/v3.0)
+
+Besides a improved integration of Docker containers (port exposing, environment variables etc.), this release also adds an improved handling of container entrypoints and start commands, which was contributed by Erik Schilling.
+The release also merges the latest Mininet code (2.3.0d5) into Containernet. Credits for this goes to Zohar Lorberbaum.
+
+### 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
+
+This release contained a lot of bug fixes and an experimental [Libvirt integration](#libvirt) which allows to use VMs within Containernet. However, this extension was later moved to a [dedicated branch](https://github.com/containernet/containernet/tree/libvirt_support) to keep the master slim and easy to use.
+
+### 2017-09-04: [Release: Containernet 1.0](https://github.com/containernet/containernet/releases/tag/v1.0)
+
+First release that added the basic integration of Docker containers into Mininet.
 
 ## Cite this work
 
@@ -123,7 +133,7 @@ containernet> exit
 ```
 
 # [](#installation)Installation
-Containernet comes with three installation and deployment options.
+Containernet comes with three installation and deployment options. You can find further documentation and help in the [wiki](https://github.com/containernet/containernet/wiki).
 
 ## Option 1: Bare-metal installation
 Automatic installation is provided through an Ansible playbook. Requires: Ubuntu **16.04 LTS**.
@@ -133,6 +143,8 @@ sudo apt-get install ansible git aptitude
 git clone https://github.com/containernet/containernet.git
 cd containernet/ansible
 sudo ansible-playbook -i "localhost," -c local install.yml
+cd ..
+sudo python setup.py install
 ```
 
 ## Option 2: Nested Docker deployment
@@ -161,10 +173,6 @@ vagrant up
 vagrant ssh
 ```
 
-# [](#libvirt)Libvirt Extension
-
-Containernet 2.0 comes with an extended version that adds [libvirt](https://libvirt.org) support which allows to connect and run arbitrary, fully-featured virtual machines (Qemu/KVM) as emulated hosts inside Containernet networks. You can find this extension in a dedicated [branch on GitHub](https://github.com/containernet/containernet/tree/libvirt_support). More documentation about the libvirt integration is available on this [wiki page](https://github.com/containernet/containernet/wiki/Libvirt-Support). *Note: The libvirt integration is still in an early stage and should be considered as experimental code!*
-
 # [](#references)References
 
 Containernet has been used for a variety of research tasks and networking projects. If you use Containernet, let us know!
@@ -187,11 +195,19 @@ Containernet has been used for a variety of research tasks and networking projec
 
 * M. Peuster, M. Marchetti, G. García de Blas, H. Karl: [Emulation-based Smoke Testing of NFV Orchestrators in Large Multi-PoP Environments](https://ris.uni-paderborn.de/publication/3347). In IEEE European Conference on Networks and Communications (EuCNC), Lubljana, Slovenia. (2018)
 
-* S. Schneider, M. Peuster,Wouter Tvernier and H. Karl: A Fully Integrated Multi-Platform NFV SDK. In IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN) Demo, Verona, Italy. (2018)
+* S. Schneider, M. Peuster,Wouter Tvernier and H. Karl: [A Fully Integrated Multi-Platform NFV SDK](https://ris.uni-paderborn.de/record/6974). In IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN) Demo, Verona, Italy. (2018)
 
 * M. Peuster, S. Schneider, Frederic Christ and H. Karl: [A Prototyping Platform to Validate and Verify Network Service Header-based Service Chains](https://ris.uni-paderborn.de/record/6483). In IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN) 5GNetApp, Verona, Italy. (2018)
 
+* S. Schneider, M. Peuster and H. Karl: [A Generic Emulation Framework for Reusing and Evaluating VNF Placement Algorithms](https://ris.uni-paderborn.de/record/6972). In IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Verona, Italy. (2018)
+
+* M. Peuster, S. Schneider, D. Behnke, M. Müller, P-B. Bök, and H. Karl: [Prototyping and Demonstrating 5G Verticals: The Smart Manufacturing Case](https://ris.uni-paderborn.de/record/8792). In IEEE 5th Conference on Network Softwarization (NetSoft) Demo, Paris, France. (2019)
+
+* M. Peuster, M. Marchetti, G. Garcia de Blas, Holger Karl: [Automated testing of NFV orchestrators against carrier-grade multi-PoP scenarios using emulation-based smoke testing](https://ris.uni-paderborn.de/record/10325). In EURASIP Journal on Wireless Communications and Networking (2019)
+
 ## Containernet is part of the OpenSource MANO research ecosystem
+
+Containernet is the basis of the [vim-emu](https://osm.etsi.org/wikipub/index.php/VIM_emulator) emulation platform for multi-PoP NFV scenarios.
 
 <center>
 <a href="https://osm.etsi.org/wikipub/index.php/Research" target="_blank">
@@ -200,14 +216,19 @@ Containernet has been used for a variety of research tasks and networking projec
 
 ## Links
 
+* [Further documentation and FAQ](https://github.com/containernet/containernet/wiki)
 * [Mininet website](http://mininet.org)
 * [Maxinet website](http://maxinet.github.io)
 * [Docker](https://www.docker.com)
 
+# [](#libvirt)Libvirt Extension
+
+Containernet 2.0 introduced an extension that added [libvirt](https://libvirt.org) support which allows to connect and run arbitrary, fully-featured virtual machines (Qemu/KVM) as emulated hosts inside Containernet networks. However, this solution turned out to be to heavy and complicated to keep it in the master branch of Containernet. As a result, it was moved to n a dedicated [branch on GitHub](https://github.com/containernet/containernet/tree/libvirt_support). More documentation about the libvirt integration is available on this [wiki page](https://github.com/containernet/containernet/wiki/Libvirt-Support). *Note: The libvirt integration must be considered as experimental!*
+
 # [](#contact)Contact
 
 ## Support
-If you have any questions, please use GitHub's [issue system](https://github.com/containernet/containernet/issues) or Containernet's [Gitter channel](https://gitter.im/containernet/) to get in touch.
+If you have any questions, please use GitHub's [issue system](https://github.com/containernet/containernet/issues) or Containernet's [Gitter channel](https://gitter.im/containernet/) to get in touch. You can find further documentation in the [wiki](https://github.com/containernet/containernet/wiki).
 
 ## Contribute
 Your contributions are very welcome! Please fork the GitHub repository and create a pull request. We use [Travis-CI](https://travis-ci.org/containernet/containernet) to automatically test new commits. 
