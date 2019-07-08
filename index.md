@@ -21,7 +21,7 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 ### 2019-07-05: [Release: Containernet 3.0](https://github.com/containernet/containernet/releases/tag/v3.0)
 
 Besides an improved integration of Docker containers (port exposing, environment variables etc.), this release also adds an improved handling of container entrypoints and start commands, which was contributed by Erik Schilling.
-The release also merges the latest Mininet code (2.3.0d5) into Containernet. Credits for this goes to Zohar Lorberbaum.
+The release also merges the latest Mininet code (2.3.0d5) into Containernet which brings support for Python 3. Credits for this goes to Zohar Lorberbaum.
 
 ### 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
 
