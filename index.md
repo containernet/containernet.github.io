@@ -220,6 +220,7 @@ Containernet is the basis of the [vim-emu](https://osm.etsi.org/wikipub/index.ph
 * [Mininet website](http://mininet.org)
 * [Maxinet website](http://maxinet.github.io)
 * [Docker](https://www.docker.com)
+* [An alternative/teaching-focused approach for Container-based Network Emulation by TU Dresden](https://git.comnets.net/public-repo/comnetsemu)
 
 # [](#libvirt)Libvirt Extension
 
