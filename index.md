@@ -8,7 +8,7 @@ layout: default
 
 <img align="left" width="200" height="200" style="margin-right: 30px" src="https://raw.githubusercontent.com/containernet/logo/master/containernet_logo_v1.png">
 
-Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the [SONATA-NFV](http://sonata-nfv.eu) project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project. Besides this, Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV), and mobile edge computing (MEC).
+Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the [SONATA-NFV](http://sonata-nfv.eu) project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project. Besides this, Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV), and multi-access edge computing (MEC).
 <br><br><br>
 
 <!--
@@ -21,7 +21,7 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 ### 2019-07-05: [Release: Containernet 3.0](https://github.com/containernet/containernet/releases/tag/v3.0)
 
 Besides an improved integration of Docker containers (port exposing, environment variables etc.), this release also adds an improved handling of container entrypoints and start commands, which was contributed by Erik Schilling.
-The release also merges the latest Mininet code (2.3.0d5) into Containernet which brings support for Python 3. Credits for this goes to Zohar Lorberbaum.
+The release also merges the latest Mininet code (2.3.0d5) into Containernet which brings support for Python3. Credits for this goes to Zohar Lorberbaum.
 
 ### 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
 
@@ -108,7 +108,7 @@ You can find this topology in [`containernet/examples/containernet_example.py`](
 Containernet requires root access to configure the emulated network described by the topology script:
 
 ```bash
-sudo python containernet_example.py
+sudo python3 containernet_example.py
 ```
 
 After launching the emulated network, you can interact with the involved containers through Mininet's interactive CLI as shown with the `ping` command in the following example:
@@ -133,44 +133,41 @@ containernet> exit
 ```
 
 # [](#installation)Installation
-Containernet comes with three installation and deployment options. You can find further documentation and help in the [wiki](https://github.com/containernet/containernet/wiki).
+Containernet comes with two installation and deployment options. You can find further documentation and help in the [wiki](https://github.com/containernet/containernet/wiki).
 
 ## Option 1: Bare-metal installation
-Automatic installation is provided through an Ansible playbook. Requires: Ubuntu **16.04 LTS**.
+Automatic installation is provided through an Ansible playbook. Requires Ubuntu **18.04 LTS** and **Python3**.
 
 ```bash
-sudo apt-get install ansible git aptitude
-git clone https://github.com/containernet/containernet.git
-cd containernet/ansible
-sudo ansible-playbook -i "localhost," -c local install.yml
-cd ..
-sudo python setup.py install
+$ sudo apt-get install ansible git aptitude
+$ git clone https://github.com/containernet/containernet.git
+$ cd containernet/ansible
+$ sudo ansible-playbook -i "localhost," -c local install.yml
+$ cd ..
+$ sudo make develop
 ```
 
 ## Option 2: Nested Docker deployment
 Containernet can be executed within a privileged Docker container (nested container deployment). There is also a pre-build Docker image available on [DockerHub](https://hub.docker.com/r/containernet/containernet/).
 
+*Attention:* Container resource limitations, e.g., CPU share limits, are not supported in the nested container deployment. Use bare-metal installations if you need those features.
+
+Build/Pull:
 ```bash
 # build the container locally
-docker build -t containernet .
-```
+$ docker build -t containernet/containernet .
 
-```bash
 # or pull the latest pre-build container
-docker pull containernet/containernet
+$ docker pull containernet/containernet
 ```
 
+Run:
 ```bash
-# run the container
-docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet /bin/bash
-```
+# run interactive container and directly start containernet example
+$ docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet
 
-## Option 3: Vagrant-based VM creation
-Using the provided Vagrantfile is the another way to run and test Containernet:
-
-```bash
-vagrant up
-vagrant ssh
+# run interactive container and drop to shell
+$ docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet /bin/bash
 ```
 
 # [](#references)References
@@ -214,11 +211,16 @@ Containernet is the basis of the [vim-emu](https://osm.etsi.org/wikipub/index.ph
 <img align="center" width="300" style="margin-right: 30px" src="https://github.com/containernet/containernet.github.io/raw/master/osm_ecosystem_research.png"></a>
 </center>
 
+## Documentation
+
+Containernet's [documentation](https://github.com/containernet/containernet/wiki) can be found in the [GitHub wiki](https://github.com/containernet/containernet/wiki). The documentation for the underlying Mininet project can be found [here](http://mininet.org/).
+
 ## Links
 
 * [Further documentation and FAQ](https://github.com/containernet/containernet/wiki)
 * [Mininet website](http://mininet.org)
 * [Maxinet website](http://maxinet.github.io)
+* [GitHub: vim-emu](https://github.com/containernet/vim-emu)
 * [Docker](https://www.docker.com)
 * [An alternative/teaching-focused approach for Container-based Network Emulation by TU Dresden](https://git.comnets.net/public-repo/comnetsemu)
 
@@ -237,6 +239,6 @@ Your contributions are very welcome! Please fork the GitHub repository and creat
 ## Lead developer
 
 Manuel Peuster
-* Mail: <manuel (dot) peuster (at) upb (dot) de>
+* Mail: <manuel (at) peuster (dot) de>
 * GitHub: [@mpeuster](https://github.com/mpeuster)
-* Website: [Paderborn University](https://cs.uni-paderborn.de/cn/person/?tx_upbperson_personsite%5BpersonId%5D=13271&tx_upbperson_personsite%5Bcontroller%5D=Person&cHash=bafec92c0ada0bdfe8af6e2ed99efb4e)
+* Website: [Peuster.de](https://peuster.de)
