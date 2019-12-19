@@ -18,6 +18,10 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 
 ## News and Releases
 
+### 2019-12-19: [Release: Containernet 3.1](https://github.com/containernet/containernet/releases/tag/v3.1)
+
+This release changes the default installation environment of Containernet to be Python3. Credits for this go to Rafael Schellenberg.
+
 ### 2019-07-05: [Release: Containernet 3.0](https://github.com/containernet/containernet/releases/tag/v3.0)
 
 Besides an improved integration of Docker containers (port exposing, environment variables etc.), this release also adds an improved handling of container entrypoints and start commands, which was contributed by Erik Schilling.
