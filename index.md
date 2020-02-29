@@ -235,7 +235,7 @@ Containernet 2.0 introduced an extension that added [libvirt](https://libvirt.or
 # [](#contact)Contact
 
 ## Support
-If you have any questions, please use GitHub's [issue system](https://github.com/containernet/containernet/issues) or Containernet's [Gitter channel](https://gitter.im/containernet/) to get in touch. You can find further documentation in the [wiki](https://github.com/containernet/containernet/wiki).
+If you have any questions, please use GitHub's [issue system](https://github.com/containernet/containernet/issues) to get in touch. You can find further documentation in the [wiki](https://github.com/containernet/containernet/wiki).
 
 ## Contribute
 Your contributions are very welcome! Please fork the GitHub repository and create a pull request. We use [Travis-CI](https://travis-ci.org/containernet/containernet) to automatically test new commits. 
