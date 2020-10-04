@@ -18,6 +18,10 @@ Containernet is a fork of the famous [Mininet](http://mininet.org) network emula
 
 ## News and Releases
 
+### 2020-10-04: Experimental support for Ubuntu 20.04 LTS
+
+Added experimental support for Ubuntu 20.04 LTS to main branch. Credits go to Dimitrios (@digiou).
+
 ### 2019-12-19: [Release: Containernet 3.1](https://github.com/containernet/containernet/releases/tag/v3.1)
 
 This release changes the default installation environment of Containernet to be Python3. Credits for this go to Rafael Schellenberg.
