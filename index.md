@@ -5,7 +5,7 @@ layout: default
 <img width="260" height="260" style="float: left; padding: 30px;" src="/assets/images/logo.png">
 
 
-Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the [SONATA-NFV](http://sonata-nfv.eu) project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project. Besides this, Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV), and multi-access edge computing (MEC).
+Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the SONATA-NFV project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project. Besides this, Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV), and multi-access edge computing (MEC).
 
 
 # [](#installation)Installation
@@ -14,7 +14,7 @@ Containernet comes with two installation and deployment options. You can find fu
 
 ## Option 1: Bare-metal installation
 
-Automatic installation is provided through an Ansible playbook. Requires Ubuntu **18.04 LTS** and **Python3**.
+Automatic installation is provided through an Ansible playbook. Requires Ubuntu **20.04 LTS** and **Python3**.
 
 ```bash
 $ sudo apt-get install ansible git aptitude
@@ -125,7 +125,7 @@ containernet>
 
 To stop the emulation, do:
 
-```
+```bash
 containernet> exit
 ```
 
@@ -158,7 +158,7 @@ Containernet has been used for a variety of research tasks and networking projec
 
 ## Cite this work
 
-If you use [Containernet](containernet.github.io) for your work, please cite the following publication:
+If you use Containernet for your work, please cite the following publication:
 
 M. Peuster, H. Karl, and S. v. Rossem: [**MeDICINE: Rapid Prototyping of Production-Ready Network Services in Multi-PoP Environments**](http://ieeexplore.ieee.org/document/7919490/). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, pp. 148-153. doi: 10.1109/NFV-SDN.2016.7919490. (2016)
 
@@ -225,7 +225,6 @@ Containernet's [documentation](https://github.com/containernet/containernet/wiki
 - [Mininet website](http://mininet.org)
 - [Maxinet website](http://maxinet.github.io)
 - [GitHub: vim-emu](https://github.com/containernet/vim-emu)
-- [Docker](https://www.docker.com)
 - [An alternative/teaching-focused approach for Container-based Network Emulation by TU Dresden](https://git.comnets.net/public-repo/comnetsemu)
 
 # [](#libvirt)Libvirt Extension
