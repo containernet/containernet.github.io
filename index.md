@@ -2,161 +2,138 @@
 layout: default
 ---
 
-<img width="260" height="260" style="float: left; padding: 30px;" src="/assets/images/logo.png">
+<!--
 
+ATTENTION: Please do not modify the following contents independently.
 
-Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the SONATA-NFV project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project. Besides this, Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV), and multi-access edge computing (MEC).
+Instead, edit the README.md of the containernet/containernet Github repository and copy
+its content here. Please exclude the first "# Containernet" line.
 
+-->
 
-# [](#installation)Installation
+<img align="left" width="200" height="200" style="margin: 30px 30px 0 0;" src="/assets/logo.png" />
 
-Containernet comes with two installation and deployment options. You can find further documentation and help in the [wiki](https://github.com/containernet/containernet/wiki).
+Containernet is a fork of the famous [Mininet](http://mininet.org) network emulator and allows to use [Docker](https://www.docker.com) containers as hosts in emulated network topologies. This enables interesting functionalities to build networking/cloud emulators and testbeds. Containernet is actively used by the research community, focussing on experiments in the field of cloud computing, fog computing, network function virtualization (NFV) and multi-access edge computing (MEC). One example for this is the [NFV multi-PoP infrastructure emulator](https://github.com/sonata-nfv/son-emu) which was created by the SONATA-NFV project and is now part of the [OpenSource MANO (OSM)](https://osm.etsi.org) project.
 
-## Option 1: Bare-metal installation
+## Features
 
-Automatic installation is provided through an Ansible playbook. Requires Ubuntu **20.04 LTS** and **Python3**.
+- Add, remove Docker containers to Mininet topologies
+- Connect Docker containers to topology (to switches, other containers, or legacy Mininet hosts)
+- Execute commands inside containers by using the Mininet CLI
+- Dynamic topology changes
+  - Add hosts/containers to a _running_ Mininet topology
+  - Connect hosts/docker containers to a _running_ Mininet topology
+  - Remove Hosts/Docker containers/links from a _running_ Mininet topology
+- Resource limitation of Docker containers
+  - CPU limitation with Docker CPU share option
+  - CPU limitation with Docker CFS period/quota options
+  - Memory/swap limitation
+  - Change CPU/mem limitations at runtime!
+- Expose container ports and set environment variables of containers through Python API
+- Traffic control links (delay, bw, loss, jitter)
+- Automated installation based on Ansible playbook
+
+## Installation
+
+Containernet comes with two installation and deployment options.
+
+### Option 1: Bare-metal installation
+
+This option is the most flexible. Your machine should run Ubuntu **20.04 LTS** and **Python3**.
+
+First install Ansible:
 
 ```bash
-$ sudo apt-get install ansible git aptitude
-$ git clone https://github.com/containernet/containernet.git
-$ cd containernet/ansible
-$ sudo ansible-playbook -i "localhost," -c local install.yml
-$ cd ..
-$ sudo make develop
+sudo apt-get install ansible
 ```
 
-## Option 2: Nested Docker deployment
-
-Containernet can be executed within a privileged Docker container (nested container deployment). There is also a pre-build Docker image available on [DockerHub](https://hub.docker.com/r/containernet/containernet/).
-
-_Attention:_ Container resource limitations, e.g., CPU share limits, are not supported in the nested container deployment. Use bare-metal installations if you need those features.
-
-Build/Pull:
+Then clone the repository:
 
 ```bash
-# build the container locally
-$ docker build -t containernet/containernet .
-
-# or pull the latest pre-build container
-$ docker pull containernet/containernet
+git clone https://github.com/containernet/containernet.git
 ```
 
-Run:
+Finally run the Ansible playbook to install required dependencies:
 
 ```bash
-# run interactive container and directly start containernet example
-$ docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet
-
-# run interactive container and drop to shell
-$ docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet /bin/bash
+sudo ansible-playbook -i "localhost," -c local containernet/ansible/install.yml
 ```
 
-# [](#get-started)Get started
+After the installation finishes, you should be able to [get started](#get-started).
 
-Using Containernet is very similar to using Mininet with [custom topologies](http://mininet.org/walkthrough/#custom-topologies).
+### Option 2: Nested Docker deployment
 
-## Create a custom topology
+Containernet can be executed within a privileged Docker container (nested container deployment). There is also a pre-build Docker image available on [Docker Hub](https://hub.docker.com/r/containernet/containernet/).
 
-To start, a Python-based network topology description has to be created as shown in the following example:
+**Attention:** Container resource limitations, e.g. CPU share limits, are not supported in the nested container deployment. Use bare-metal installations if you need those features.
+
+You can build the container locally:
+
+```bash
+sudo docker build -t containernet/containernet .
+```
+
+or alternatively pull the latest pre-build container:
+
+```bash
+docker pull containernet/containernet
+```
+
+You can then directly start the default containernet example:
+
+```bash
+docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet
+```
+
+or run an interactive container and drop to the shell:
+
+```bash
+docker run --name containernet -it --rm --privileged --pid='host' -v /var/run/docker.sock:/var/run/docker.sock containernet/containernet /bin/bash
+```
+
+## Get started
+
+Using Containernet is very similar to using Mininet.
+
+### Running a basic example
+
+Make sure you are in the `containernet` directory. You can start an example topology with some empty Docker containers connected to the network:
+
+```bash
+sudo python3 examples/containernet_example.py
+```
+
+After launching the emulated network, you can interact with the involved containers through Mininet's interactive CLI. You can for example:
+
+- use `containernet> d1 ifconfig` to see the config of container `d1`
+- use `containernet> d1 ping -c4 d2` to ping between containers
+
+You can exit the CLI using `containernet> exit`.
+
+### Customizing topologies
+
+You can also add hosts with resource restrictions or mounted volumes:
 
 ```python
-"""
-Example topology with two containers (d1, d2),
-two switches, and one controller:
+# ...
 
-          - (c)-
-         |      |
-(d1) - (s1) - (s2) - (d2)
-"""
-from mininet.net import Containernet
-from mininet.node import Controller
-from mininet.cli import CLI
-from mininet.link import TCLink
-from mininet.log import info, setLogLevel
-setLogLevel('info')
-
-net = Containernet(controller=Controller)
-info('*** Adding controller\n')
-net.addController('c0')
-info('*** Adding docker containers using ubuntu:trusty images\n')
 d1 = net.addDocker('d1', ip='10.0.0.251', dimage="ubuntu:trusty")
-d2 = net.addDocker('d2', ip='10.0.0.252', dimage="ubuntu:trusty")
-info('*** Adding switches\n')
-s1 = net.addSwitch('s1')
-s2 = net.addSwitch('s2')
-info('*** Creating links\n')
-net.addLink(d1, s1)
-net.addLink(s1, s2, cls=TCLink, delay='100ms', bw=1)
-net.addLink(s2, d2)
-info('*** Starting network\n')
-net.start()
-info('*** Testing connectivity\n')
-net.ping([d1, d2])
-info('*** Running CLI\n')
-CLI(net)
-info('*** Stopping network')
-net.stop()
+d2 = net.addDocker('d2', ip='10.0.0.252', dimage="ubuntu:trusty", cpu_period=50000, cpu_quota=25000)
+d3 = net.addHost('d3', ip='11.0.0.253', cls=Docker, dimage="ubuntu:trusty", cpu_shares=20)
+d4 = net.addDocker('d4', dimage="ubuntu:trusty", volumes=["/:/mnt/vol1:rw"])
+
+# ...
 ```
 
-You can find this topology in [`containernet/examples/containernet_example.py`](https://github.com/containernet/containernet/tree/master/examples/containernet_example.py).
+## Documentation
 
-## Run emulation and interact with containers
+Containernet's documentation can be found in the [GitHub wiki](https://github.com/containernet/containernet/wiki). The documentation for the underlying Mininet project can be found on the [Mininet website](http://mininet.org/).
 
-Containernet requires root access to configure the emulated network described by the topology script:
-
-```bash
-sudo python3 containernet_example.py
-```
-
-After launching the emulated network, you can interact with the involved containers through Mininet's interactive CLI as shown with the `ping` command in the following example:
-
-```bash
-containernet> d1 ping -c3 d2
-PING 10.0.0.252 (10.0.0.252) 56(84) bytes of data.
-64 bytes from 10.0.0.252: icmp_seq=1 ttl=64 time=200 ms
-64 bytes from 10.0.0.252: icmp_seq=2 ttl=64 time=200 ms
-64 bytes from 10.0.0.252: icmp_seq=3 ttl=64 time=200 ms
-
---- 10.0.0.252 ping statistics ---
-3 packets transmitted, 3 received, 0% packet loss, time 2002ms
-rtt min/avg/max/mdev = 200.162/200.316/200.621/0.424 ms
-containernet>
-```
-
-To stop the emulation, do:
-
-```bash
-containernet> exit
-```
-
-# News and Releases
-
-## 2020-10-04: Experimental support for Ubuntu 20.04 LTS
-
-Added experimental support for Ubuntu 20.04 LTS to main branch. Credits go to Dimitrios (@digiou).
-
-## 2019-12-19: [Release: Containernet 3.1](https://github.com/containernet/containernet/releases/tag/v3.1)
-
-This release changes the default installation environment of Containernet to be Python3. Credits for this go to Rafael Schellenberg.
-
-## 2019-07-05: [Release: Containernet 3.0](https://github.com/containernet/containernet/releases/tag/v3.0)
-
-Besides an improved integration of Docker containers (port exposing, environment variables etc.), this release also adds an improved handling of container entrypoints and start commands, which was contributed by Erik Schilling.
-The release also merges the latest Mininet code (2.3.0d5) into Containernet which brings support for Python3. Credits for this goes to Zohar Lorberbaum.
-
-## 2018-04-03: [Release: Containernet 2.0](https://github.com/containernet/containernet/releases/tag/v2.0)
-
-This release contained a lot of bug fixes and an experimental [Libvirt integration](#libvirt) which allows to use VMs within Containernet. However, this extension was later moved to a [dedicated branch](https://github.com/containernet/containernet/tree/libvirt_support) to keep the master slim and easy to use.
-
-## 2017-09-04: [Release: Containernet 1.0](https://github.com/containernet/containernet/releases/tag/v1.0)
-
-First release that added the basic integration of Docker containers into Mininet.
-
-# [](#references)References
+## Research
 
 Containernet has been used for a variety of research tasks and networking projects. If you use Containernet, let us know!
 
-## Cite this work
+### Cite this work
 
 If you use Containernet for your work, please cite the following publication:
 
@@ -178,7 +155,7 @@ Bibtex:
 }
 ```
 
-## Publications
+### Publications
 
 - M. Peuster, H. Karl, and S. v. Rossem: [MeDICINE: Rapid Prototyping of Production-Ready Network Services in Multi-PoP Environments](http://ieeexplore.ieee.org/document/7919490/). IEEE Conference on Network Function Virtualization and Software Defined Networks (NFV-SDN), Palo Alto, CA, USA, pp. 148-153. doi: 10.1109/NFV-SDN.2016.7919490. IEEE. (2016)
 
@@ -206,42 +183,37 @@ Bibtex:
 
 - M. Peuster, M. Marchetti, G. Garcia de Blas, Holger Karl: [Automated testing of NFV orchestrators against carrier-grade multi-PoP scenarios using emulation-based smoke testing](https://ris.uni-paderborn.de/record/10325). In EURASIP Journal on Wireless Communications and Networking (2019)
 
-## Containernet is part of the OpenSource MANO research ecosystem
+## Other projects and links
 
-Containernet is the basis of the [vim-emu](https://osm.etsi.org/wikipub/index.php/VIM_emulator) emulation platform for multi-PoP NFV scenarios.
+There is an extension of Containernet called [vim-emu](https://github.com/containernet/vim-emu) which is a full-featured multi-PoP emulation platform for NFV scenarios. Vim-emu was developed as part of the [SONATA-NFV](http://www.sonata-nfv.eu) project and is now hosted by the [OpenSource MANO project](https://osm.etsi.org/):
 
-<center>
-<a href="https://osm.etsi.org/wikipub/index.php/Research" target="_blank">
-<img align="center" width="300" style="margin-right: 30px" src="/assets/images/osm_ecosystem_research.png"></a>
-</center>
+<p align="center">
+    <a href="https://osm.etsi.org/wikipub/index.php/Research" target="_blank">
+        <img align="center" width="200" src="/assets/osm_ecosystem_research.png">
+    </a>
+</p>
 
-## Documentation
+For running Mininet or Containernet distributed in a cluster, checkout [Maxinet](http://maxinet.github.io).
 
-Containernet's [documentation](https://github.com/containernet/containernet/wiki) can be found in the [GitHub wiki](https://github.com/containernet/containernet/wiki). The documentation for the underlying Mininet project can be found [here](http://mininet.org/).
+You can also find an alternative/teaching-focused approach for Container-based Network Emulation by TU Dresden in [their repository](https://git.comnets.net/public-repo/comnetsemu).
 
-## Links
+## Contact
 
-- [Further documentation and FAQ](https://github.com/containernet/containernet/wiki)
-- [Mininet website](http://mininet.org)
-- [Maxinet website](http://maxinet.github.io)
-- [GitHub: vim-emu](https://github.com/containernet/vim-emu)
-- [An alternative/teaching-focused approach for Container-based Network Emulation by TU Dresden](https://git.comnets.net/public-repo/comnetsemu)
+### Support
 
-# [](#libvirt)Libvirt Extension
+If you have any questions, please use GitHub's [issue system](https://github.com/containernet/containernet/issues).
 
-Containernet 2.0 introduced an extension that added [libvirt](https://libvirt.org) support which allows to connect and run arbitrary, fully-featured virtual machines (Qemu/KVM) as emulated hosts inside Containernet networks. However, this solution turned out to be to heavy and complicated to keep it in the master branch of Containernet. As a result, it was moved to n a dedicated [branch on GitHub](https://github.com/containernet/containernet/tree/libvirt_support). More documentation about the libvirt integration is available on this [wiki page](https://github.com/containernet/containernet/wiki/Libvirt-Support). _Note: The libvirt integration must be considered as experimental!_
+### Contribute
 
-# [](#contact)Contact
+Your contributions are very welcome! Please fork the GitHub repository and create a pull request.
 
-## Support
+Please make sure to test your code using
 
-If you have any questions, please [create an issue](https://github.com/containernet/containernet/issues) to get in touch. You can find further documentation in the [wiki](https://github.com/containernet/containernet/wiki).
+```bash
+sudo make test
+```
 
-## Contribute
-
-Your contributions are very welcome! Please fork the GitHub repository and create a pull request. We use Github Actions to automatically test new commits.
-
-## Lead developer
+### Lead developer
 
 Manuel Peuster
 
